@@ -5,6 +5,14 @@ public class Plata extends Tranzactie{
     private String numeu;
     private double suma1;
 
+    public double getSuma1() {
+        return suma1;
+    }
+
+    public void setSuma1(double suma1) {
+        this.suma1 = suma1;
+    }
+
     public String getNumeu() {
         return numeu;
     }
@@ -58,4 +66,16 @@ public class Plata extends Tranzactie{
      public String  toString(){
         return ( "IdulPLati:"+iplata + "Currency:" + mon + " Nume utilizator:"+ numeu + " Bani lui/ei sunt:" + suma1);
     }
+    @Override
+    public String verificabani() {
+        if (suma1 > 0 ){
+            return " E ok " + suma1;
+        } else if (suma1 == 0) {
+            return " E zero man " + suma1;
+        }
+        else {
+            return " GO and GET a  Job! " + suma1;
+        }
+    }
+
 }

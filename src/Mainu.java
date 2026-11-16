@@ -1,4 +1,10 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class Mainu {
     public static void main(String[] args) {
@@ -29,14 +35,91 @@ public class Mainu {
 
 
         for (Plata plata : listaDePlata) {
-            System.out.println(plata.toString() + " Comision" + plata.Taxadeprotectie());
+            System.out.println(plata.toString() + " Suma de bani dupa comision : " + plata.Taxadeprotectie() + "\n" +  plata.verificabani());
 
 
         }
-        for(Transfer transfer: ListadeTransferuri) {
-            System.out.println(transfer.toString()+ "Comision :"+ transfer.Taxadeprotectie());
+        for (Transfer transfer : ListadeTransferuri) {
+            System.out.println(transfer.toString() + " Suma de bani  dupa comision : " + transfer.Taxadeprotectie() +   "\n" +transfer.verificabani());
 
+        } //Apelam cele 2 metode pentru liste (4)
+        VerificareId(listaDePlata,ListadeTransferuri);
+        AtentieSuma(listaDePlata,ListadeTransferuri);
+    //Apelam interfata..(5)
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Interfata1(ListadeTransferuri, listaDePlata).setVisible(true);
+            }
+        });
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+//4
+    public static void VerificareId(ArrayList<Plata> p, ArrayList<Transfer> t) {
+        System.out.println("Se verifica idurile in caz de frauda");
+        boolean suspicune = false;
+        for (Plata P : p) {
+            if (P.getIplata() != null && P.getIplata().length() < 5) {
+                System.out.println("Suspicios om...." + P.toString());
+                suspicune = true;
+            }
+        }
+        for (Transfer T : t) {
+            if (T.getIdT() != null && T.getIdT().length() < 5) {
+                System.out.println("Suspicios Transfer..... " + T.toString());
+                suspicune = true;
+            }
+        }
+        if (!suspicune) {
+            System.out.println("Toate idurile sunt valide si corecte. NUS probleme");
+        }
+    }
+    public static void AtentieSuma(ArrayList<Plata> p1, ArrayList<Transfer> t1){
+        Scanner scanner= new Scanner(System.in);
+        System.out.println("Zimi suma pe care vrei sa o cauti");
+        double sumaCautata  = scanner.nextDouble();
+        if(sumaCautata < 0){
+            System.out.println("Get a job ! " + sumaCautata);
+            return;
+        }
+        System.out.println("Plate  cu suma :"+ sumaCautata + "sunt:");
+        boolean  cautaP = false;
+        for ( Plata P1:p1){
+            if (P1.getSuma1() >= sumaCautata ){
+                System.out.println(P1.toString());
+                cautaP = true;
+            }
+        }
+        if(!cautaP) {
+            System.out.println("Nu ai plati  pentru aceasta suma !");
         }
 
+        System.out.println("Transferuri cu suma : " + sumaCautata + "sunt");
+        boolean cautaT = false;
+        for (Transfer T1:t1){
+            if (T1.getSuma2() >= sumaCautata){
+                System.out.println(T1.toString());
+                cautaT = true;
+
+
+            }
+        }
+        if(!cautaT){
+            System.out.println("Nu ai transferuri pentru aceasta suma !");
+        }
     }
 }

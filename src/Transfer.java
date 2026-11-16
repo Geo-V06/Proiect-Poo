@@ -65,6 +65,14 @@ public class Transfer extends  Plata {
         this.suma2 = suma2;
     }
 
+    public double getSuma2() {
+        return suma2;
+    }
+
+    public void setSuma2(double suma2) {
+        this.suma2 = suma2;
+    }
+
     public Transfer(Transfer c) {
         super(c);
         this.timptransfer = c.timptransfer;
@@ -83,4 +91,17 @@ public class Transfer extends  Plata {
     public String toString(){
         return(   "Timpul de transfer:" + timptransfer + "Contul sursa:" + conts + "Contul destinatar:" + contd +"Idul Transferului" + idT + "Suma de bani a transferului:"+ suma2);
     }
-}
+    @Override
+    public String verificabani() {
+        if (suma2 > 0 ){
+            return " E ok " + suma2;
+        } else if (suma2 == 0) {
+            return " E zero man " + suma2;
+        }
+        else {
+            return " GO and GET a  Job! " + suma2;
+        }
+    }
+
+    }
+

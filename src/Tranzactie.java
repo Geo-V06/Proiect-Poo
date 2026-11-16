@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public  abstract class Tranzactie {
 
     private String iTranzactie;  //1
@@ -19,21 +22,59 @@ public  abstract class Tranzactie {
     public void setSuma(double suma) {
         this.suma = suma;
     }
-    public  boolean verificabani(){         //Metoda 1
-       return suma>=0;
+
+    //Metoda 1
+    public String verificabani() {
+        if (suma > 0 ){
+            return " E ok " + suma;
+        } else if (suma == 0) {
+            return " E zero man " + suma;
+        }
+        else {
+            return " GO and get a  Job! " + suma;
+        }
+
+
+
     }
-    public double  Taxadeprotectie(){       //Metoda 2
-        double comision = 0.05*suma;
+
+    public double Taxadeprotectie() {       //Metoda 2
+        double comision = 0.05 * suma;
         return suma - comision;
 
     }
-    public String verificainternetul (boolean Online){    //Metodata 3
+
+    public String verificainternetul(boolean Online) {    //Metodata 3
         if (Online)
             return "Plata se poate efectua!";
         else
             return "Imposibila!";
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
